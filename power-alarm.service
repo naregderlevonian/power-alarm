@@ -1,0 +1,11 @@
+[Unit]
+Description=Power Alarm Monitor
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/power-alarm
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target

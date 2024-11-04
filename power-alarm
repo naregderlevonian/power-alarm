@@ -1,0 +1,17 @@
+#!/bin/sh
+
+ALARM_FILE="/tmp/power-alarm.level"
+
+BATTERY_LEVEL=$(cat /sys/class/power_supply/BAT0/capacity)
+
+if [ "$BATTERY_LEVEL" -lt 10 ]; then
+    if [ ! -f "$ALARM_FILE" ]; then
+        zenity --warning --text="Connect the charger to avoid shutdown" --title="Power Alarm"
+        touch "$ALARM_FILE"
+    fi
+else
+    if [ -f "$ALARM_FILE" ]; then
+        rm "$ALARM_FILE"
+    fi
+fi
+
